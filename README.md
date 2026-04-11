@@ -148,7 +148,10 @@ integração com modelo preditivo
 
 👉 (adicione aqui o link do seu deploy)
 
-🧩 Estrutura do Projeto
+</> Markdown
+```bash
+## Estrutura do Projeto
+
 projeto_enem_ml/
 
 ├── dados/                  # Dados brutos e tratados
@@ -175,7 +178,7 @@ projeto_enem_ml/
 ├── scripts/                # Execução e treinamento
 ├── relatorios/             # Imagens e outputs
 └── README.md
-
+---
 ![home_app](relatorios/imagens/home_app.gif)
 ![home_app](relatorios/imagens/socioeconomico_app.gif)
 
