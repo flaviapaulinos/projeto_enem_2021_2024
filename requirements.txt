@@ -10,8 +10,7 @@ pyarrow
 matplotlib==3.8.4
 seaborn
 
-geopandas==0.14.4
-shapely==2.0.3
-pyproj==3.6.1
-geobr
+geopandas==0.12.2
+shapely==1.8.5
+geobr==0.2.1
 duckdb==0.10.2
