@@ -1,0 +1,11 @@
+{
+    "alpha": 60,
+    "rmse_medio": 6.307124479174044,
+    "rmse_std": 0.5038370625008644,
+    "r2_medio": 0.9838114222984172,
+    "cv": 7.988379873657493,
+    "estabilidade": "\u2705 Est\u00e1vel",
+    "ide_normalizado": 0.046285619421909105,
+    "n_amostras": 63,
+    "n_features": 9
+}

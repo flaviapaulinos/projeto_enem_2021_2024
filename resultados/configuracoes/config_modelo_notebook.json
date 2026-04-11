@@ -1,0 +1,42 @@
+{
+    "melhor_alpha": 60,
+    "features": {
+        "categoricas_nao_ordenadas": [
+            "Ano",
+            "Escola"
+        ],
+        "categorica_ordenada": [
+            "SalMin"
+        ],
+        "ordem_renda": [
+            "at\u00e9 1",
+            "1 a 3",
+            "3 a 5",
+            "5 a 10",
+            "10 a 15",
+            "15 a 20",
+            "acima de 20"
+        ],
+        "numericas": [
+            "OcupPaisMedia",
+            "EscolaridadePaisMedia",
+            "Cel",
+            "Comptdr",
+            "PessoasResd"
+        ]
+    },
+    "target": "NotaMedia",
+    "metricas": {
+        "rmse_medio": 6.436889883765483,
+        "rmse_std": 0.5134510156125898,
+        "r2_medio": 0.9830809394571178,
+        "cv": 7.976694100478052,
+        "estabilidade": "\u2705 Est\u00e1vel"
+    },
+    "data": {
+        "n_amostras": 63,
+        "n_features": 8
+    },
+    "autor": "Flavia Paulinos",
+    "data_treino": "2026-04-03 18:03:11"
+}

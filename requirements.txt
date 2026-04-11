@@ -1,0 +1,17 @@
+streamlit==1.54.0
+pandas==2.2.2
+numpy==1.26.4
+plotly
+
+scikit-learn
+joblib
+pyarrow
+
+matplotlib
+seaborn
+
+geopandas==0.14.4
+shapely==2.0.3
+pyproj==3.6.1
+geobr
+duckdb==0.10.2

@@ -1,0 +1,21 @@
+# dados
+dados/
+mlruns/
+
+# notebooks pesados
+*.ipynb_checkpoints
+notebooks/dashboard/
+
+# modelos grandes (se necessário)
+modelos/*.joblib
+
+# ambiente
+venv/
+.env
+
+# python
+__pycache__/
+*.pyc
+
+# sistema
+.DS_Store
