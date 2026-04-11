@@ -106,12 +106,19 @@ elif pagina == PAGINA_PROJETO:
 
 elif pagina == PAGINA_MODELO:
     render_aba_modelo()
+caminho_banner = Path(__file__).parent / "relatorios" / "imagens" / "banner_assinatura.png"
 
-st.markdown(
-    """
-    <a href="https://github.com/flaviapaulinos" target="_blank">
-        <img src="relatorios/imagens/banner_assinatura.png" style="width:100%; cursor:pointer;">
-    </a>
-    """,
-    unsafe_allow_html=True
-)
+if caminho_banner.exists():
+    # Cria o link com a imagem usando st.image
+    st.markdown(
+        '<a href="https://github.com/flaviapaulinos" target="_blank">',
+        unsafe_allow_html=True
+    )
+    st.image(str(caminho_banner), use_container_width=True)
+    st.markdown('</a>', unsafe_allow_html=True)
+else:
+    # Fallback: apenas o link
+    st.markdown(
+        '<a href="https://github.com/flaviapaulinos" target="_blank" style="display:block; text-align:center;">🔗 GitHub</a>',
+        unsafe_allow_html=True
+    )

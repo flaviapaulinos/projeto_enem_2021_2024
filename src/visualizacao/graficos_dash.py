@@ -2717,7 +2717,6 @@ def tabela_plotly_gradiente(
             font=dict(size=18, family="Arial Bold, Arial, sans-serif")
         ),
         margin=dict(l=50, r=50, t=100, b=50),
-        paper_bgcolor="white",
         font=dict(family="Arial, sans-serif")
     )
 
@@ -4486,8 +4485,8 @@ def grafico_evolucao_temporal_acurado(
         ),
         height=700,
         width=700,
-        plot_bgcolor="white",
-        paper_bgcolor="white",
+        #plot_bgcolor="white",
+        #paper_bgcolor="white",
         hovermode="x unified",
         separators=".,",
         xaxis=dict(
@@ -4521,7 +4520,8 @@ def grafico_evolucao_temporal_acurado(
         hoverlabel=dict(
             bgcolor="white",
             font_size=12,
-            font_family="Arial"
+            font_family="Arial",
+            font_color="dimgrey"  # ← Cor dimgrey adicionada aqui
         )
     )
 
@@ -5675,7 +5675,7 @@ def tabela_notas_maximas(df: pd.DataFrame, ano_selecionado: Optional[str] = None
             xanchor="center",
             font=dict(size=16)
         ),
-        height=300 + 40 * len(df_tabela),
+        height=400 + 40 * len(df_tabela),
         margin=dict(l=20, r=20, t=60, b=50)
     )
     
@@ -6611,7 +6611,7 @@ def bubble_chart_4d(
         xref="paper", yref="paper",
         text=texto_nota,
         showarrow=False,
-        font=dict(size=10),
+        font=dict(size=10, color='dimgrey'),
         align="left",
         bordercolor="grey",
         borderwidth=1,

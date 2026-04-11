@@ -1,13 +1,14 @@
 # dados
 dados/
+
+# Mas NÃO ignora a pasta analiticos
+!dados/analiticos/
+!dados/analiticos/*.parquet
 mlruns/
 
 # notebooks pesados
 *.ipynb_checkpoints
 notebooks/dashboard/
-
-# modelos grandes (se necessário)
-modelos/*.joblib
 
 # ambiente
 venv/

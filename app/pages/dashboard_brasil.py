@@ -44,6 +44,10 @@ def render_dashboard_brasil():
         * Os dados socioeconômicos provêm de um questionário respondido pelos participantes no ato da isncrição no Enem.  
         """
     )
+        st.caption(
+            "O mapa do Brasil pode levar alguns instantes para carregar devido ao volume de dados processados. "
+            "Aguarde o carregamento completo para uma melhor experiência."
+        )
         
     elif subaba == "estrutura socioeconômica":
         st.subheader("Análise Social e Demográfica — Brasil")
