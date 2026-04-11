@@ -32,7 +32,7 @@ def render_aba_modelo():
     # =========================
     # FORMULÁRIO
     # =========================
-    info_fullwidth(
+    st.markdown(
         """ O modelo desenvolvido neste projeto tem como objetivo estimar a nota média esperada a partir de um perfil socioeconômico, com foco em uma interpretação estrutural e agregada. 
         
         Cada observação do modelo representa um grupo definido por:

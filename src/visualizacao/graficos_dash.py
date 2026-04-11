@@ -4514,14 +4514,14 @@ def grafico_evolucao_temporal_acurado(
             xanchor="center",
             x=0.5,
             font=dict(size=12, color=FONTE_COR),
-            bgcolor="rgba(255,255,255,0.8)"
+            #bgcolor="rgba(255,255,255,0.8)"
         ),
         margin=dict(l=50, r=50, t=120, b=150),
         hoverlabel=dict(
-            bgcolor="white",
+            #bgcolor="white",
             font_size=12,
             font_family="Arial",
-            font_color="dimgrey"  # ← Cor dimgrey adicionada aqui
+            #font_color="dimgrey"  # ← Cor dimgrey adicionada aqui
         )
     )
 
@@ -6576,7 +6576,7 @@ def bubble_chart_4d(
             xanchor="right",
             yanchor="top",
             bordercolor="lightgray",
-            bgcolor="rgba(255,255,255,0.95)",
+            #bgcolor="rgba(255,255,255,0.95)",
             borderwidth=1
         ),
         coloraxis_colorbar=dict(
@@ -6611,12 +6611,12 @@ def bubble_chart_4d(
         xref="paper", yref="paper",
         text=texto_nota,
         showarrow=False,
-        font=dict(size=10, color='dimgrey'),
+        font=dict(size=12 ),
         align="left",
-        bordercolor="grey",
+        bordercolor="dimgrey",
         borderwidth=1,
         borderpad=8,
-        bgcolor="rgba(255,255,255,0.95)",
+        bgcolor="rgba(255,255,255,0.30)",
         width=400,
     )
 
@@ -7238,7 +7238,7 @@ def gerar_mapa_enem(
                 x=0.05,
                 y=0.92,
                 showactive=True,
-                bgcolor="white",
+                #bgcolor="white",
                 bordercolor="gray",
                 font=dict(size=13),
             )

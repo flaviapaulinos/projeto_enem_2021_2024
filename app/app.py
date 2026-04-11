@@ -1,6 +1,7 @@
 from __future__ import annotations
 import sys
 from pathlib import Path
+import base64
 
 ROOT_PATH = Path(__file__).resolve().parents[1]
 if str(ROOT_PATH) not in sys.path:
@@ -90,7 +91,8 @@ elif pagina == PAGINA_PROJETO:
 elif pagina == PAGINA_MODELO:
     banner("relatorios/imagens/banner_modelo.png")
     
-st.markdown("<div style='margin-top:10px'></div>", unsafe_allow_html=True)    
+st.markdown("<div style='margin-top:10px'></div>", unsafe_allow_html=True) 
+st.caption("Recomendado para visualização em modo claro.")
 
 # =========================================================
 # RENDER
@@ -106,19 +108,20 @@ elif pagina == PAGINA_PROJETO:
 
 elif pagina == PAGINA_MODELO:
     render_aba_modelo()
-caminho_banner = Path(__file__).parent / "relatorios" / "imagens" / "banner_assinatura.png"
 
-if caminho_banner.exists():
-    # Cria o link com a imagem usando st.image
-    st.markdown(
-        '<a href="https://github.com/flaviapaulinos" target="_blank">',
-        unsafe_allow_html=True
-    )
-    st.image(str(caminho_banner), use_container_width=True)
-    st.markdown('</a>', unsafe_allow_html=True)
-else:
-    # Fallback: apenas o link
-    st.markdown(
-        '<a href="https://github.com/flaviapaulinos" target="_blank" style="display:block; text-align:center;">🔗 GitHub</a>',
-        unsafe_allow_html=True
-    )
+img_path = ROOT_PATH / "relatorios/imagens/banner_assinatura.png"
+
+# converter para base64
+with open(img_path, "rb") as f:
+    img_bytes = f.read()
+    img_base64 = base64.b64encode(img_bytes).decode()
+
+# HTML com imagem embutida
+st.markdown(
+    f"""
+    <a href="https://github.com/flaviapaulinos" target="_blank">
+        <img src="data:image/png;base64,{img_base64}" style="width:100%; cursor:pointer;">
+    </a>
+    """,
+    unsafe_allow_html=True
+)
