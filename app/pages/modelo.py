@@ -16,7 +16,7 @@ from src.preprocessamento.categorias import (
     ORDEM_ESCOLA
 )
 
-from utils.layout import linha_controles, divisor, info_fullwidth
+from utils.layout import linha_controles, divisor
 
 
 def render_aba_modelo():
