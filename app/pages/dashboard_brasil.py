@@ -17,7 +17,34 @@ from src.visualizacao.graficos_dash import (
     criar_painel_indicadores_gerais,
     gerar_mapa_enem,
 )
+def controles_sidebar_apoio_br(opcoes_geo, key_prefix="br"):
+    import streamlit as st
 
+    st.sidebar.caption("Ajustes rápidos")
+
+    geo = st.sidebar.selectbox(
+        "UF",
+        [None] + opcoes_geo,
+        format_func=lambda x: "Todos" if x is None else x,
+        key=f"{key_prefix}_geo_sidebar"
+    )
+
+    escola = st.sidebar.selectbox(
+        "Escola",
+        ["Todas", "não informada", "pública", "privada"],
+        key=f"{key_prefix}_escola_sidebar"
+    )
+
+    materia = st.sidebar.selectbox(
+        "Matéria",
+        ["Todas", "Matemática", "Linguagens"],
+        key=f"{key_prefix}_materia_sidebar"
+    )
+
+    # 🔥 sincronização com topo
+    st.session_state[f"{key_prefix}_geo"] = geo
+    st.session_state[f"{key_prefix}_escola"] = escola
+    st.session_state[f"{key_prefix}_materia"] = materia
 
 @st.cache_data(show_spinner=False)
 def get_mapa(df):
@@ -41,7 +68,7 @@ def render_dashboard_brasil():
             """Visão agregada do desempenho e da composição dos participantes do Enem no Brasil em 2024. 
             
         Devido à disponibilização dos dados em bases separadas (perfil socioeconômico e resultados), as análises são realizadas em nível agregado, permitindo identificar padrões estruturais regionais.
-        * Os dados socioeconômicos provêm de um questionário respondido pelos participantes no ato da isncrição no Enem.  
+        * Os dados socioeconômicos provêm de um questionário respondido pelos participantes no ato da inscrição no Enem.  
         """
     )
         st.caption(
@@ -76,7 +103,18 @@ def render_dashboard_brasil():
             """
         )
         
-    subaba, uf,_, escola, materia = linha_controles(
+    # =========================================================
+    # CONTROLES (SIDEBAR + TOPO)
+    # =========================================================
+    
+    # Sidebar (apoio)
+    controles_sidebar_apoio_br(
+        opcoes_geo=sorted(df_d["uf"].dropna().unique()),
+        key_prefix="br"
+    )
+    
+    # Topo (principal)
+    subaba, uf, _, escola, materia = linha_controles(
         subabas=["visão geral", "estrutura socioeconômica", "desempenho", "desempenho x estrutura"],
         pagina_atual="brasil",
         opcoes_geo=sorted(df_d["uf"].dropna().unique()),

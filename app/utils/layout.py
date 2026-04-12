@@ -18,7 +18,6 @@ PAGINAS_LABEL = {
     PAGINA_PROJETO: "Projeto",
 }
 
-
 # =========================================================
 # 🔹 ESTADO GLOBAL DO APP
 # =========================================================
@@ -33,26 +32,40 @@ def set_pagina(pagina: str) -> None:
 # =========================================================
 # 🔹 MENU SUPERIOR (NAVEGAÇÃO PRINCIPAL)
 # =========================================================
-def menu_paginas() -> None:
+def menu_paginas(prefix: str = "top") -> None:
     """
-    Renderiza o menu superior de navegação do app.
-    Controla exclusivamente a mudança de páginas.
+    Renderiza o menu de navegação.
+    O prefix garante keys únicas (top / footer).
     """
 
     col1, col2, col3, col4, _ = st.columns([1, 1, 1, 1, 6])
 
-    if col1.button(PAGINAS_LABEL[PAGINA_MG]):
+    if col1.button(PAGINAS_LABEL[PAGINA_MG], key=f"{prefix}_mg"):
         set_pagina(PAGINA_MG)
 
-    if col2.button(PAGINAS_LABEL[PAGINA_BRASIL]):
+    if col2.button(PAGINAS_LABEL[PAGINA_BRASIL], key=f"{prefix}_brasil"):
         set_pagina(PAGINA_BRASIL)
 
-    if col3.button(PAGINAS_LABEL[PAGINA_MODELO]):
+    if col3.button(PAGINAS_LABEL[PAGINA_MODELO], key=f"{prefix}_modelo"):
         set_pagina(PAGINA_MODELO)
 
-    if col4.button(PAGINAS_LABEL[PAGINA_PROJETO]):
+    if col4.button(PAGINAS_LABEL[PAGINA_PROJETO], key=f"{prefix}_projeto"):
         set_pagina(PAGINA_PROJETO)
+        
+# =========================================================
+# 🔹 MENU INFERIOR (NAVEGAÇÃO PRINCIPAL)
+# =========================================================
 
+def menu_paginas_footer():
+
+    st.markdown(
+        "<div style='margin-top:40px; margin-bottom:10px;'></div>",
+        unsafe_allow_html=True
+    )
+
+    st.caption("Navegue entre as seções do dashboard:")
+
+    menu_paginas(prefix="footer")
 
 # =========================================================
 # 🔹 BANNER
@@ -77,6 +90,122 @@ def linha_controles(
 ):
 
     subaba = st.session_state.get(f"{key_prefix}_subaba", subabas[0])
+
+    # =========================
+    # CONFIG DINÂMICA
+    # =========================
+    mostrar_escola = subaba in [
+        "estrutura socioeconômica",
+        "desempenho",
+        "desempenho x estrutura",
+    ]
+
+    mostrar_materia = subaba in [
+        "desempenho",
+        "desempenho x estrutura",
+    ]
+
+    n_cols = 3  # subaba + região
+
+    if opcoes_ano:
+        n_cols += 1
+    if mostrar_escola:
+        n_cols += 1
+    if mostrar_materia:
+        n_cols += 1
+
+    cols = st.columns(n_cols)
+
+    i = 0
+
+    # =========================
+    # SUBABA
+    # =========================
+    with cols[i]:
+        subaba = st.selectbox(
+            "",
+            options=subabas,
+            key=f"{key_prefix}_subaba",
+        )
+    i += 1
+
+    # =========================
+    # REGIÃO / UF
+    # =========================
+    with cols[i]:
+        geo = st.selectbox(
+            "Região" if pagina_atual == "minas_gerais" else "UF",
+            options=[None] + opcoes_geo,
+            format_func=lambda x: "Todos" if x is None else x,
+            key=f"{key_prefix}_geo",
+        )
+    i += 1
+
+    # =========================
+    # ANO
+    # =========================
+    ano = None
+    if opcoes_ano:
+        with cols[i]:
+            ano = st.selectbox(
+                "Ano",
+                options=[None] + opcoes_ano,
+                format_func=lambda x: "Todos" if x is None else x,
+                key=f"{key_prefix}_ano",
+            )
+        i += 1
+
+    # =========================
+    # TIPO DE ESCOLA
+    # =========================
+    escola = None
+    if mostrar_escola:
+        with cols[i]:
+            escola = st.selectbox(
+                "Escola",
+                options=["Todas", "não informada", "pública", "privada"],
+                key=f"{key_prefix}_escola",
+            )
+        i += 1
+
+    # =========================
+    # MATÉRIA
+    # =========================
+    materia = None
+    if mostrar_materia:
+        from src.config import MAPA_MATERIA_LABEL_PARA_COLUNA
+
+        with cols[i]:
+            materia = st.selectbox(
+                "Matéria",
+                options=list(MAPA_MATERIA_LABEL_PARA_COLUNA.keys()),
+                key=f"{key_prefix}_materia",
+            )
+
+    return subaba.lower(), geo, ano, escola, materia
+
+# =========================================================
+# 🔹 SIDEBAR ()
+# =========================================================
+
+def menu_sidebar():
+    import streamlit as st
+
+    st.sidebar.markdown("### Navegação")
+
+    pagina = st.sidebar.radio(
+        "",
+        options=[
+            PAGINA_MG,
+            PAGINA_BRASIL,
+            PAGINA_MODELO,
+            PAGINA_PROJETO,
+        ],
+        format_func=lambda x: PAGINAS_LABEL[x],
+        key="sidebar_nav"
+    )
+
+    set_pagina(pagina)
 
     # =========================
     # CONFIG DINÂMICA

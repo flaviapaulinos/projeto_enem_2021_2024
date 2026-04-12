@@ -65,7 +65,7 @@ COLOR_MAP_RENDA_COMP = {
     "3 a 5": "cornflowerblue",
     "5 a 10": "deepskyblue",
     "10 a 15": "lightsalmon",
-    "15 a 20": "deepskyblue",
+    "15 a 20": "gold",
     "acima de 20": "darkolivegreen",
 }
 

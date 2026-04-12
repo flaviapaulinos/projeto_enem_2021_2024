@@ -55,12 +55,13 @@ def render_subaba_social_demografica_mg(
         with col_radio:
             categoria = st.radio(
                 "",
-                options=["escola", "sal_min", "sexo", "cor_raca"],
+                options=["escola", "sal_min", "sexo", "cor_raca", "faixa_etaria"],
                 format_func=lambda x: {
-                    "sexo": "Sexo",
-                    "cor_raca": "Cor/Raça",
-                    "escola": "Escola",
-                    "sal_min": "Renda Mensal Familiar (salários mínimos)",
+                    "sexo": "sexo",
+                    "cor_raca": "cor/raça",
+                    "escola": "escola",
+                    "sal_min": "renda mensal familiar (salários mínimos)",
+                    "faixa_etaria": "faixa etária",
                 }[x],
                 horizontal=True,
                 key="mg_social_categoria",

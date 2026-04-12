@@ -45,21 +45,60 @@ def render_aba_modelo():
         Essa agregação reduz o ruído individual e permite analisar relações mais estáveis entre contexto social e desempenho educacional."""
     )
 
-    col1, col2 = st.columns(2)
+    col1, col2 = st.columns([1.2, 1])
 
     with col1:
-        salmin = st.selectbox("Renda familiar", ORDEM_SAL_MIN)
-        escola = st.selectbox("Tipo de escola", ORDEM_ESCOLA)
-        cel = st.selectbox("Celulares", [0, 1, 2, 3, "4 ou mais"])
-        comp = st.selectbox("Computadores", [0, 1, 2, 3, "4 ou mais"])
-        pessoas = st.slider("Pessoas na residência", 1, 10, 3)
+
+        st.subheader(" Capital Familiar (núcleo estrutural)")
+        with st.container():
+            salmin = st.selectbox("Renda familiar", ORDEM_SAL_MIN)
+            col_f1, col_f2 = st.columns(2)
+            with col_f1:
+                ocup_pai = st.selectbox("Ocupação pai", ORDEM_OCUPACAO)
+                esc_pai = st.selectbox("Escolaridade pai", ORDEM_PAIS_ESCOLARIDADE)
+            with col_f2:
+                ocup_mae = st.selectbox("Ocupação mãe", ORDEM_OCUPACAO)
+                esc_mae = st.selectbox("Escolaridade mãe", ORDEM_PAIS_ESCOLARIDADE)
+        
+        st.subheader("💻 Acesso Tecnológico")
+        with st.container():
+            cel = st.selectbox("Celulares", [0, 1, 2, 3, "4 ou mais"])
+            comp = st.selectbox("Computadores", [0, 1, 2, 3, "4 ou mais"])
+        
+        st.subheader("🏫 Institucional")
+        with st.container():
+            escola = st.selectbox("Tipo de escola", ORDEM_ESCOLA)
+        
+        st.subheader("🏠 Estrutura domiciliar")
+        with st.container():
+            pessoas = st.slider("Pessoas na residência", 1, 10, 3)
+
 
     with col2:
-        ocup_pai = st.selectbox("Ocupação pai", ORDEM_OCUPACAO)
-        ocup_mae = st.selectbox("Ocupação mãe", ORDEM_OCUPACAO)
-        esc_pai = st.selectbox("Escolaridade pai", ORDEM_PAIS_ESCOLARIDADE)
-        esc_mae = st.selectbox("Escolaridade mãe", ORDEM_PAIS_ESCOLARIDADE)
+        st.markdown("""
+        <div style="background-color:#f5f7fa; padding:18px; border-radius:10px; border:1px solid #e1e5ea">
 
+        <b>📊 Sobre o modelo</b><br><br>
+
+        O termo chave aqui é: <b>desempenho médio</b>.<br><br>
+        
+        Sabemos que indivíduos são complexos — e muitas vezes surpreendem.<br><br>
+        
+        Alguns superam desafios socioeconômicos significativos. Outros, mesmo com estrutura, enfrentam obstáculos que os dados não capturam.<br><br>
+        
+        Por isso, este modelo não descreve indivíduos, mas <b>padrões médios de grupos</b>.<br><br>
+        
+        Ele permite quantificar como diferentes dimensões estruturais se relacionam com o desempenho educacional.<br><br>
+        
+        A utilização de dados agregados reduz o ruído individual e favorece maior estabilidade estatística — ainda que limite a variabilidade observável.<br><br>
+        
+        Os resultados indicam que o desempenho médio pode ser representado por uma estrutura aproximadamente linear, mesmo diante de múltiplas dimensões interdependentes.
+
+        
+        </div>
+        """, unsafe_allow_html=True)
+                
+        
     # =========================
     # TRATAMENTO
     # =========================
@@ -140,6 +179,43 @@ def render_aba_modelo():
             st.caption(
                 "O score estrutural representa a contribuição linear das condições sociais previstas pelo modelo. Valores negativos indicam contexto estrutural menos favorecido relativamente à média observada."
                 )
+            st.markdown("""
+                <div style="background-color:#f5f7fa; padding:18px; border-radius:10px; border:1px solid #e1e5ea">
+                
+                <b>📊 Interpretação</b><br><br>
+                <b>Principais evidências</b><br><br>
+        
+                • Impactos positivos:<br>
+                – escola privada<br>
+                – escolaridade dos pais<br>
+                – acesso tecnológico<br><br>
+                
+                → indicam presença de capital cultural e tecnológico.<br><br>
+                
+                • Impactos negativos:<br>
+                – escola pública<br>
+                – maior densidade domiciliar<br>
+                – menor renda<br><br>
+                
+                → associados à vulnerabilidade estrutural.<br><br>
+                
+                <b>⚠️ Interpretação central</b><br><br>
+                
+                O modelo captura padrões persistentes da desigualdade educacional.<br><br>
+                
+                <b>Elasticidade</b><br>
+                IDE normalizado < 0.10 indica fenômeno multidimensional — nenhuma variável atua isoladamente.<br><br>
+                
+                <b>Índice de Desempenho Estrutural</b><br><br>
+                
+                • Capital Familiar → principal determinante<br>
+                • Acesso Tecnológico → mediação<br>
+                • Institucional → impacto relevante, porém limitado<br><br>
+                
+                O ambiente familiar apresenta maior poder explicativo do que fatores institucionais isolados.
+
+                 </div>
+            """, unsafe_allow_html=True)
 
         except Exception as e:
             st.error(f"Erro na predição: {e}")

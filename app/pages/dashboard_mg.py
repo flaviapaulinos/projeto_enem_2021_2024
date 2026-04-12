@@ -17,8 +17,45 @@ from src.visualizacao.graficos_dash import (
     gerar_mapa_enem,
     grafico_evolucao_temporal_acurado,
 )
+def controles_sidebar_apoio(opcoes_geo, opcoes_ano=None, key_prefix="mg"):
+    import streamlit as st
 
+    st.sidebar.caption("Ajustes rápidos")
 
+    geo = st.sidebar.selectbox(
+        "Região",
+        [None] + opcoes_geo,
+        format_func=lambda x: "Todos" if x is None else x,
+        key=f"{key_prefix}_geo_sidebar"
+    )
+
+    if opcoes_ano:
+        ano = st.sidebar.selectbox(
+            "Ano",
+            [None] + opcoes_ano,
+            format_func=lambda x: "Todos" if x is None else x,
+            key=f"{key_prefix}_ano_sidebar"
+        )
+
+    escola = st.sidebar.selectbox(
+        "Escola",
+        ["Todas", "não informada", "pública", "privada"],
+        key=f"{key_prefix}_escola_sidebar"
+    )
+
+    materia = st.sidebar.selectbox(
+        "Matéria",
+        ["Todas", "Matemática", "Linguagens"],
+        key=f"{key_prefix}_materia_sidebar"
+    )
+
+    # 🔥 sincronização
+    st.session_state[f"{key_prefix}_geo"] = geo
+    if opcoes_ano:
+        st.session_state[f"{key_prefix}_ano"] = ano
+    st.session_state[f"{key_prefix}_escola"] = escola
+    st.session_state[f"{key_prefix}_materia"] = materia
+    
 @st.cache_data(show_spinner=False)
 def get_mapa(df):
     return gerar_mapa_enem(df, "regiao_mg", ano_selecionado=None)
@@ -46,27 +83,39 @@ def render_dashboard_mg():
 
     if subaba_display == "visão geral":
         
-    # 🔹 APRESENTAÇÃO DO PROJETO
-        info_fullwidth(
-            """Análise dos fatores socioeconômicos e sua relação com o desempenho dos participantes do ENEM ao longo da série histórica (2021–2024), com foco no estado de Minas Gerais. O projeto integra dashboard interativo e modelo preditivo para interpretação estrutural dos dados.
+        col1, col2 = st.columns([1, 1])
         
-    Este dashboard analisa a relação entre fatores socioeconômicos e desempenho no ENEM,com foco em Minas Gerais e comparação com o Brasil.
+        with col1:
+            info_fullwidth(
+                """Análise dos fatores socioeconômicos e sua relação com o desempenho dos participantes do Enem ao longo da série histórica (2021–2024), com foco no estado de Minas Gerais.<br><br>
+            A abordagem combina análise descritiva, agregações ponderadas por participantes e visualizações multivariadas para identificar padrões estruturais na desigualdade educacional e modelo preditivo.
         
-    A abordagem combina análise descritiva, agregações ponderadas por participantes e visualizações multivariadas para identificar padrões estruturais na desigualdade educacional.
+        🔎 Explore as abas para analisar diferentes dimensões do desempenho educacional.
+        
+        **Mais informações na página Projeto.**"""
+            )
 
+        with col2:
+            st.markdown(
+                """
+            <div style="background-color:#01818078; solid #01818078">
             
-    🔎 Explore as abas para analisar diferentes dimensões do desempenho educacional.
-    
-    **Mais informações na página Projeto.**"""
-        )
+            <b>Contexto e interpretação</b>
+            
+            O Brasil é diverso e complexo — e os dados refletem apenas parte dessa realidade.<br>
+            
+            O questionário socioeconômico do Enem é uma fonte rica de informações sobre o contexto dos participantes. Quando analisado em conjunto com o desempenho nas provas, permite observar como fatores estruturais influenciam os resultados educacionais. Ainda assim, é importante reconhecer que os indivíduos são mais complexos do que qualquer base de dados pode representar.<br>
+            Por isso, as análises deste projeto são feitas em nível agregado, considerando grupos e médias — uma forma de compreender padrões estruturais, sem perder de vista que cada trajetória é única.
+            
+            </div>
+                    """,
+                    unsafe_allow_html=True
+                )
         
-        st.subheader("Visão Geral: ENEM — Minas Gerais (2021–2024)")
+        st.subheader("Visão Geral: Enem — Minas Gerais (2021–2024)")
         
         info_fullwidth(
-        """Visão consolidada do ENEM em Minas Gerais ao longo da série histórica.  
-        Devido à disponibilização dos dados em bases separadas em 2024 (perfil socioeconômico e desempenho), as análises são realizadas em nível agregado, 
-        permitindo identificar padrões estruturais regionais.
-        * Os dados socioeconômicos provêm de um questionário respondido pelos participantes no ato da isncrição no Enem.  """
+        """Visão consolidada do ENEM em Minas Gerais ao longo da série histórica. """
         )
     
     elif subaba_display == "estrutura socioeconômica":
@@ -80,7 +129,7 @@ def render_dashboard_mg():
     
     elif subaba_display == "desempenho":
         st.subheader("Análise de Desempenho — Minas Gerais")
-        st.caption("Base analítica: ENEM 2021–2024")
+        st.caption("Base analítica: Enem 2021–2024")
         
         info_fullwidth(
             """Análise do desempenho dos participantes, com foco na identificação de padrões regionais, diferenças por tipo de escola e distribuição das notas.  
@@ -94,12 +143,24 @@ def render_dashboard_mg():
             """Análise integrada da relação entre fatores socioeconômicos e desempenho ao longo do tempo, permitindo observar padrões estruturais persistentes 
         e possíveis mecanismos associados às desigualdades educacionais."""
         )
+    # =========================================================
+    # CONTROLES (SIDEBAR + TOPO)
+    # =========================================================
+    
+    # Sidebar (apoio)
+    controles_sidebar_apoio(
+        opcoes_geo=sorted(df_d["regiao"].dropna().unique()),
+        opcoes_ano=anos,
+        key_prefix="mg"
+    )
+    
+    # Topo (principal)
     subaba, regiao, ano, escola, materia = linha_controles(
         subabas=["visão geral", "estrutura socioeconômica", "desempenho", "desempenho x estrutura"],
         pagina_atual="minas_gerais",
         opcoes_geo=sorted(df_d["regiao"].dropna().unique()),
         key_prefix="mg",
-        opcoes_ano=anos,  
+        opcoes_ano=anos,
     )
     
     df_d = filtrar_df(df_d, regiao=regiao, ano=ano, escola=escola)

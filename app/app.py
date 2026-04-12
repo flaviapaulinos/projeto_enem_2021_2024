@@ -15,8 +15,9 @@ from pages.projeto import render_aba_projeto
 from pages.modelo import render_aba_modelo
 
 from utils.layout import (
-    menu_paginas,
     banner,
+    menu_paginas,
+    menu_paginas_footer,
     get_pagina,
     PAGINA_BRASIL,
     PAGINA_MG,
@@ -31,19 +32,10 @@ st.set_page_config(
     page_title="ENEM Análise",
     page_icon="📊",
     layout="wide",
+    initial_sidebar_state="collapsed"
 )
 
-# =========================================================
-# HIDE SIDEBAR
-# =========================================================
-st.markdown(
-    """
-    <style>
-        [data-testid="stSidebar"] {display: none;}
-    </style>
-    """,
-    unsafe_allow_html=True
-)
+
 
 # =========================================================
 # MENU
@@ -72,7 +64,8 @@ st.markdown(
     
     </style>
     """, unsafe_allow_html=True)
-menu_paginas()
+
+menu_paginas(prefix="top")
 
 pagina = get_pagina()
 
@@ -109,12 +102,19 @@ elif pagina == PAGINA_PROJETO:
 elif pagina == PAGINA_MODELO:
     render_aba_modelo()
 
+
+
+menu_paginas_footer()
+
+
 img_path = ROOT_PATH / "relatorios/imagens/banner_assinatura.png"
+
 
 # converter para base64
 with open(img_path, "rb") as f:
     img_bytes = f.read()
     img_base64 = base64.b64encode(img_bytes).decode()
+
 
 # HTML com imagem embutida
 st.markdown(
