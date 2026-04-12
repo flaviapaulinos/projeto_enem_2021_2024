@@ -18,23 +18,27 @@ from src.preprocessamento.categorias import (
 
 from utils.layout import linha_controles, divisor
 
-
+caminho = PASTA_RESULTADOS / "modelo_produto.joblib"
 def render_aba_modelo():
 
     # =========================
     # CARREGAR MODELO
     # =========================
     @st.cache_resource
+    
     def carregar_modelo():
-        caminho = Path("resultados/modelo_produto.joblib")
-
+        # Obtém o diretório do arquivo atual
+        diretorio_atual = Path(__file__).parent  # app/pages/
+        # Sobe para a raiz do projeto (app/ -> projeto_enem_ml/)
+        raiz_projeto = diretorio_atual.parent.parent  # vai até /projeto_enem_ml/
+        
+        caminho = raiz_projeto / "resultados" / "modelo_produto.joblib"
+        
         if not caminho.exists():
             st.error(f"Modelo não encontrado em: {caminho}")
             st.stop()
-            
+        
         return joblib.load(caminho)
-
-    modelo = carregar_modelo()
 
 
     # =========================
