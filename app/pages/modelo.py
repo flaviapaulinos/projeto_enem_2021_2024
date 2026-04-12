@@ -16,7 +16,7 @@ from src.preprocessamento.categorias import (
     ORDEM_ESCOLA
 )
 
-from utils.layout import linha_controles, divisor, info_fullwidth,
+from utils.layout import linha_controles, divisor, info_fullwidth
 
 
 def render_aba_modelo():
@@ -31,7 +31,7 @@ def render_aba_modelo():
         if not caminho.exists():
             st.error(f"Modelo não encontrado em: {caminho}")
             st.stop()
-
+            
         return joblib.load(caminho)
 
     modelo = carregar_modelo()
