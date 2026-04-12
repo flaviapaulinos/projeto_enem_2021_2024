@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import joblib
 
+from pathlib import Path
+
+
 from src.config import PASTA_RESULTADOS
 
 from src.modelos.interpretacao import score_estrutural
@@ -23,7 +26,12 @@ def render_aba_modelo():
     # =========================
     @st.cache_resource
     def carregar_modelo():
-        caminho = PASTA_RESULTADOS / "modelo_produto.joblib"
+        caminho = Path("resultados/modelo_produto.joblib")
+
+        if not caminho.exists():
+            st.error(f"Modelo não encontrado em: {caminho}")
+            st.stop()
+
         return joblib.load(caminho)
 
     modelo = carregar_modelo()
