@@ -4,7 +4,17 @@ import streamlit as st
 from services.loaders import carregar_bases_mg
 from utils.helpers_filtros import filtrar_df
 from utils.helpers_ui import plot
-from utils.layout import linha_controles, divisor, info_fullwidth, get_estado_controles
+from utils.layout import (
+    linha_controles, 
+    divisor, 
+    info_fullwidth, 
+    get_estado_controles, 
+    set_pagina, 
+    PAGINA_MG, 
+    PAGINA_BRASIL, 
+    PAGINA_MODELO, 
+    PAGINA_PROJETO
+)
 
 from components.secoes_mg import (
     render_subaba_social_demografica_mg,
@@ -87,10 +97,11 @@ def render_dashboard_mg():
         
         with col1:
             info_fullwidth(
-                """Análise dos fatores socioeconômicos e sua relação com o desempenho dos participantes do Enem ao longo da série histórica (2021–2024), com foco no estado de Minas Gerais.<br><br>
-            A abordagem combina análise descritiva, agregações ponderadas por participantes e visualizações multivariadas para identificar padrões estruturais na desigualdade educacional e modelo preditivo.
+                """Quanto o contexto social influencia a nota no ENEM?<br><br>
+    
+        🔎 Navegque pelas abas para analisar os fatores socioeconômicos e sua relação com o desempenho dos participantes do Enem ao longo da série histórica (2021–2024), com foco no estado de Minas Gerais.<br><br>
+        A abordagem combina análise descritiva, agregações ponderadas por participantes e visualizações multivariadas para identificar padrões estruturais na desigualdade educacional e modelo preditivo.
         
-        🔎 Explore as abas para analisar diferentes dimensões do desempenho educacional.
         
         **Mais informações na página Projeto.**"""
             )
@@ -172,7 +183,11 @@ def render_dashboard_mg():
     # VISÃO GERAL
     # =========================================================
     if subaba == "visão geral":
-
+        
+        st.caption(
+            "Os gráficos podem levar alguns instantes para carregar devido ao volume de dados processados. "
+            "Aguarde o carregamento completo para uma melhor experiência."
+        )
 
         col1, col2 = st.columns(2)
 
@@ -204,6 +219,11 @@ def render_dashboard_mg():
     # SOCIAL
     # =========================================================
     elif subaba == "estrutura socioeconômica":
+        
+        st.caption(
+            "Os gráficos podem levar alguns instantes para carregar devido ao volume de dados processados. "
+            "Aguarde o carregamento completo para uma melhor experiência."
+        )
 
         divisor()
 
@@ -217,6 +237,11 @@ def render_dashboard_mg():
     # DESEMPENHO
     # =========================================================
     elif subaba == "desempenho":
+        
+        st.caption(
+            "Os gráficos podem levar alguns instantes para carregar devido ao volume de dados processados. "
+            "Aguarde o carregamento completo para uma melhor experiência."
+        )
         
         divisor()
         
@@ -239,6 +264,11 @@ def render_dashboard_mg():
     # NOVA SUBABA
     # =========================================================
     elif subaba == "desempenho x estrutura":
+        
+        st.caption(
+            "Os gráficos podem levar alguns instantes para carregar devido ao volume de dados processados. "
+            "Aguarde o carregamento completo para uma melhor experiência."
+        )
         
         divisor()
         

@@ -9,10 +9,10 @@ if str(ROOT_PATH) not in sys.path:
 
 import streamlit as st
 
-from pages.dashboard_brasil import render_dashboard_brasil
-from pages.dashboard_mg import render_dashboard_mg
-from pages.projeto import render_aba_projeto
-from pages.modelo import render_aba_modelo
+from views.dashboard_brasil import render_dashboard_brasil
+from views.dashboard_mg import render_dashboard_mg
+from views.projeto import render_aba_projeto
+from views.modelo import render_aba_modelo
 
 from utils.layout import (
     banner,

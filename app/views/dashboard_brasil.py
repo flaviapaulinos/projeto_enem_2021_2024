@@ -71,10 +71,6 @@ def render_dashboard_brasil():
         * Os dados socioeconômicos provêm de um questionário respondido pelos participantes no ato da inscrição no Enem.  
         """
     )
-        st.caption(
-            "O mapa do Brasil pode levar alguns instantes para carregar devido ao volume de dados processados. "
-            "Aguarde o carregamento completo para uma melhor experiência."
-        )
         
     elif subaba == "estrutura socioeconômica":
         st.subheader("Análise Social e Demográfica — Brasil")
@@ -129,6 +125,11 @@ def render_dashboard_brasil():
     divisor()
 
     if subaba == "visão geral":
+        
+        st.caption(
+            "Os gráficos podem levar alguns instantes para carregar devido ao volume de dados processados. "
+            "Aguarde o carregamento completo para uma melhor experiência."
+        )
 
         col1, col2 = st.columns(2)
 
@@ -147,6 +148,11 @@ def render_dashboard_brasil():
             )
 
     elif subaba == "estrutura socioeconômica":
+        
+        st.caption(
+            "Os gráficos podem levar alguns instantes para carregar devido ao volume de dados processados. "
+            "Aguarde o carregamento completo para uma melhor experiência."
+        )
 
 
 
@@ -157,6 +163,11 @@ def render_dashboard_brasil():
         )
 
     elif subaba == "desempenho":
+        
+        st.caption(
+            "Os gráficos podem levar alguns instantes para carregar devido ao volume de dados processados. "
+            "Aguarde o carregamento completo para uma melhor experiência."
+        )
 
 
         render_subaba_notas_br(
@@ -170,6 +181,11 @@ def render_dashboard_brasil():
   
 
     elif subaba == "desempenho x estrutura":
+        
+        st.caption(
+            "Os gráficos podem levar alguns instantes para carregar devido ao volume de dados processados. "
+            "Aguarde o carregamento completo para uma melhor experiência."
+        )
 
 
         render_subaba_desempenho_estrutura_br(
