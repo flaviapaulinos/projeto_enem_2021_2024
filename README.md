@@ -165,7 +165,6 @@ O dashboard permite:
 
 ```
 ├── dados/                  # Dados brutos e tratados
-├── modelos/                # Modelos treinados
 ├── notebooks/              # Pipeline analítico completo
 │   ├── 00_preprocessamento
 │   ├── 01_consolidacao
@@ -173,20 +172,23 @@ O dashboard permite:
 │   ├── 03_eda
 │   ├── 04_modelagem
 │   └── dashboard
-│
-├── app/                    # Aplicação Streamlit
+├── src/                     # Código estruturado (pipeline + modelagem)
+│   ├── dados/
+│   ├── ingestao/
+│   ├── modelos/
+│   ├── preprocessamento/
+│   └── utils/
+│   └── visualizacao/
+├── scripts/               # Execução e treinamento
+├── relatorios/            # Imagens e outputs
+├── referências            # Dicionários
+├── resultados/            # Modelos treinados, métricas, tabelas
+├── app/                   # Aplicação Streamlit
 │   ├── pages/
 │   ├── components/
 │   ├── services/
 │   └── utils/
 │
-├── src/                    # Código estruturado (pipeline + modelagem)
-│   ├── preprocessamento/
-│   ├── modelos/
-│   └── visualizacao/
-│
-├── scripts/                # Execução e treinamento
-├── relatorios/             # Imagens e outputs
 └── README.md
 ```
 
