@@ -18,7 +18,7 @@ from src.preprocessamento.categorias import (
 
 from utils.layout import linha_controles, divisor
 
-caminho = PASTA_RESULTADOS / "modelo_produto.joblib"
+
 def render_aba_modelo():
 
     # =========================
@@ -39,6 +39,7 @@ def render_aba_modelo():
             st.stop()
         
         return joblib.load(caminho)
+    modelo = carregar_modelo()
 
 
     # =========================
