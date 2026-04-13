@@ -14,7 +14,7 @@
 </p>
 
 ---
-
+dúvida 
 ## 📌 Visão Geral
 
 Este projeto investiga a relação entre **estrutura socioeconômica** e o desempenho dos participantes no ENEM, com foco em **Minas Gerais** e no **Brasil**.
@@ -391,7 +391,7 @@ The project includes a **Streamlit dashboard** with:
 ## 🧩 Project Structure
 
 projeto_enem_ml/
-
+```
 ├── dados/ # Raw and processed data
 ├── modelos/ # Trained models
 ├── notebooks/ # Full analytical pipeline
@@ -416,7 +416,7 @@ projeto_enem_ml/
 ├── scripts/ # Training and execution
 ├── relatorios/ # Reports and images
 └── README.md
-
+```
 ## ⚠️ Limitations
 
 - Observational data → no causal inference  
@@ -457,4 +457,7 @@ This project contributes to a broader understanding of educational inequality, a
 
 ## 📬 Contact
 
-*(add your LinkedIn / GitHub here)*
+## Contato
+
+🔗 [GitHub: https://github.com/flaviapaulinos](https://github.com/flaviapaulinos)  
+🔗 [LinkedIn: https://www.linkedin.com/in/fl%C3%A1via-paulino-a5654831/](https://www.linkedin.com/in/fl%C3%A1via-paulino-a5654831/)
