@@ -1,158 +1,170 @@
-![banner](relatorios/imagens/banner_dashboard.png)
-## ENEM, Estrutura Socioeconômica e Desempenho Educacional
+# 📊 ENEM, Estrutura Socioeconômica e Desempenho Educacional
+
+![banner](relatorios/imagens/banner_projeto.png)
 
 ![Python](https://img.shields.io/badge/Python-3.10-blue)
 ![Streamlit](https://img.shields.io/badge/Streamlit-Dashboard-red)
-![ML](https://img.shields.io/badge/Machine%20Learning-Model-green)
+![Machine Learning](https://img.shields.io/badge/Machine%20Learning-Model-green)
 ![Status](https://img.shields.io/badge/status-active-success)
 
-<p align="center"> <sub> Análise estrutural da desigualdade educacional com base nos microdados do ENEM </sub> </p>
-📌 Visão Geral
+<p align="center">
+  <sub>
+    Análise estrutural da desigualdade educacional com base nos microdados do ENEM
+  </sub>
+</p>
 
-Este projeto investiga a relação entre estrutura socioeconômica e o desempenho dos participantes no ENEM, com foco no estado de Minas Gerais e no Brasil.
+---
 
-A proposta vai além da análise descritiva, incorporando uma abordagem estrutural e interpretável, com o objetivo de responder:
+## 📌 Visão Geral
 
-Qual é a nota média esperada dado um perfil socioeconômico?
+Este projeto investiga a relação entre **estrutura socioeconômica** e o desempenho dos participantes no ENEM, com foco em **Minas Gerais** e no **Brasil**.
+
+A proposta vai além da análise descritiva, adotando uma abordagem **estrutural e interpretável**, com o objetivo de responder:
+
+> Qual é a nota média esperada dado um perfil socioeconômico?
 
 A análise integra múltiplas dimensões:
 
-* renda familiar
-* escolaridade dos responsáveis
-* ocupação dos responsáveis
-* tipo de escola
-* acesso à tecnologia
+- renda familiar  
+- escolaridade dos responsáveis  
+- ocupação dos responsáveis  
+- tipo de escola  
+- acesso à tecnologia  
 
-Os resultados indicam que o desempenho educacional está associado a uma estrutura multidimensional persistente, e não a fatores isolados.
+Os resultados indicam que o desempenho educacional está associado a uma **estrutura multidimensional persistente**, e não a fatores isolados.
 
 ![projeto](relatorios/imagens/projeto.png)
 
-### Contexto
+---
 
-Os dados utilizados são os microdados oficiais do ENEM, disponibilizados pelo INEP.
+## 🔍 Contexto
 
-Foram utilizadas duas abordagens principais:
+Os dados utilizados são os microdados oficiais do ENEM (INEP).
 
-Brasil (2024) → análise agregada nacional
-Minas Gerais (2021–2024) → análise temporal e estrutural
+Abordagens utilizadas:
 
-⚠️ Em 2024, as bases foram disponibilizadas separadamente (perfil e desempenho), impossibilitando análise individual direta — o projeto trata essa limitação explicitamente.
+- **Brasil (2024)** → análise agregada nacional  
+- **Minas Gerais (2021–2024)** → análise temporal e estrutural  
 
-### Principais Insights
+⚠️ Em 2024, as bases foram disponibilizadas separadamente (perfil e desempenho), impossibilitando análise individual direta.
+
+---
+
+## 📊 Principais Insights
 
 ![grafico_1](relatorios/imagens/participacao_renda_nota.png)
 
-A análise exploratória revelou padrões estruturais consistentes:
+A análise revelou padrões estruturais consistentes:
 
-📈 Renda e desempenho
-A nota média dos participantes de maior renda apresentam notas significativamente superiores
-Diferença de até ~200 pontos entre extremos de renda
-🏫 Tipo de escola
-Escolas privadas apresentam desempenho médio superior mesmo dentro da mesma faixa de renda
-Evidência de efeito institucional relevante
-👨‍👩‍👧 Capital familiar
-Escolaridade e ocupação dos pais são fortes preditores de desempenho
-Funcionam como proxy de capital cultural
-💻 Tecnologia
-Maior acesso a computador e celular está associado a melhor desempenho
-Atua como fator de mediação
-🌍 Desigualdade regional
-Diferenças persistentes entre regiões de Minas Gerais
-Destaque para contraste entre RMBH e regiões como Jequitinhonha
+- 📈 **Renda**: diferença de até ~200 pontos entre extremos  
+- 🏫 **Tipo de escola**: efeito institucional relevante  
+- 👨‍👩‍👧 **Capital familiar**: forte preditor de desempenho  
+- 💻 **Tecnologia**: fator complementar ao aprendizado  
+- 🌍 **Desigualdade regional**: persistente entre regiões  
 
 ![grafico_2](relatorios/imagens/rendaxdesempenho.png)
 
-### ⚙️ Pipeline de Dados
+---
 
-O projeto foi estruturado com foco em reprodutibilidade e organização em camadas:
+## ⚙️ Pipeline de Dados
 
-1. Ingestão
-Conversão de CSV → Parquet
-Padronização de schemas
-2. Transformações
-Agregações via DuckDB
-Criação de bases intermediárias
-3. Consolidação
-Merge entre dados socioeconômicos e desempenho
-Construção de bases analíticas
+Estruturado com foco em reprodutibilidade:
 
-✔ Melhor performance
-✔ Rastreabilidade
-✔ Reuso de dados
+1. **Ingestão**
+   - CSV → Parquet  
+   - Padronização de schema  
 
-#### Engenharia de Features
+2. **Transformação**
+   - Agregações com DuckDB  
+   - Bases intermediárias  
 
-Foram criadas variáveis estruturais com foco em interpretabilidade:
+3. **Consolidação**
+   - Merge socioeconômico + desempenho  
+   - Base analítica final  
 
-Faixas de renda (salários mínimos)
-Escolaridade dos pais (ordenada)
-Ocupação dos pais
-Tipo de escola
-Indicadores agregados regionais
+✔ Performance  
+✔ Rastreabilidade  
+✔ Reuso  
 
-✔ Tratamento de valores ausentes
-✔ Padronização categórica
-✔ Estrutura pronta para modelagem
+---
 
-#### Modelagem Preditiva
+## 🧠 Engenharia de Features
 
-O projeto utiliza uma abordagem agregada e interpretável, focada em estrutura social.
+- Faixas de renda (salários mínimos)  
+- Escolaridade dos pais (ordinal)  
+- Ocupação dos pais  
+- Tipo de escola  
+- Indicadores regionais  
 
-#### Objetivo
+✔ Tratamento de missing  
+✔ Padronização categórica  
+✔ Pronto para modelagem  
 
-Estimar a nota média esperada dado um perfil socioeconômico.
+---
 
-#### Estratégia
+## 🤖 Modelagem Preditiva
 
-Modelagem supervisionada
-Unidade de análise: grupos socioeducacionais (não indivíduos)
-Foco em interpretabilidade
+### 🎯 Objetivo
+Estimar a **nota média esperada** dado um perfil socioeconômico.
 
-#### Hipótese central
+### 🧩 Estratégia
 
-A variação do desempenho é predominantemente explicada por fatores estruturais socioeconômicos.
+- Aprendizado supervisionado  
+- Unidade: grupos socioeducacionais  
+- Foco em interpretabilidade  
 
-#### Base de treino
-Minas Gerais (2021–2023)
-Dados agregados (DADOS_AGG_MG_ML)
+### 🧠 Hipótese
 
-#### Resultado
+> O desempenho é majoritariamente explicado por fatores estruturais socioeconômicos.
+
+### 📊 Base de treino
+
+- Minas Gerais (2021–2023)  
+- Dados agregados  
+
+### 🏆 Resultado
 
 O modelo permite:
 
-quantificar impacto de variáveis socioeconômicas
-simular cenários educacionais
-interpretar desigualdades estruturais
+- estimar desempenho esperado  
+- interpretar desigualdades  
+- simular cenários  
 
 ![grafico_3](relatorios/imagens/mapa_estrutural_regiao.png)
 
-### Experimentos e Rastreamento
+---
 
-O treinamento dos modelos foi conduzido com uso de MLflow para:
+## 🔬 Experimentos
 
-- registro de métricas (RMSE, R², CV)
-- versionamento de modelos
-- comparação entre abordagens (analítica vs produto)
+Uso de MLflow para:
 
-O deploy do dashboard utiliza os artefatos finais exportados, sem dependência direta do MLflow.
+- métricas (RMSE, R²)  
+- versionamento de modelos  
+- comparação entre abordagens  
 
-### Dashboard Interativo
+---
 
-O projeto inclui um dashboard desenvolvido em Streamlit, com:
+## 📊 Dashboard Interativo
 
-visualizações interativas
-análise por região e perfil
-exploração de desigualdades
-integração com modelo preditivo
-🔗 Acesso ao app
+![socioeconomico_app](relatorios/imagens/socioeconomico_app.gif)
 
-👉 (adicione aqui o link do seu deploy)
+![desempenho_app](relatorios/imagens/desempenho_app.gif)
 
-</> Markdown
-```bash
-## Estrutura do Projeto
+![modelo_app](relatorios/imagens/modelo_app.gif)
 
-projeto_enem_ml/
+O dashboard permite:
+
+- exploração interativa  
+- análise regional  
+- simulação com modelo  
+
+👉 **[Acesse o dashboard](https://projetoenem.streamlit.app/)**
+
+---
+
+##  Estrutura do Projeto
+
+
 
 ├── dados/                  # Dados brutos e tratados
 ├── modelos/                # Modelos treinados
@@ -179,8 +191,7 @@ projeto_enem_ml/
 ├── relatorios/             # Imagens e outputs
 └── README.md
 ---
-![home_app](relatorios/imagens/home_app.gif)
-![home_app](relatorios/imagens/socioeconomico_app.gif)
+
 
 ### Limitações
 * Dados observacionais → não permitem inferência causal
@@ -209,7 +220,12 @@ Este projeto contribui para uma leitura mais ampla do sistema educacional, alinh
 * Streamlit
 * Plotly
 * Scikit-learn
-* MLflow (experimentos e rastreamento de modelos — ambiente local)
+* MLflow (experimentos e rastreamento de modelos — ambiente local
+
+## Contato
+
+🔗 [GitHub: https://github.com/flaviapaulinos](https://github.com/flaviapaulinos)  
+🔗 [LinkedIn: https://www.linkedin.com/in/fl%C3%A1via-paulino-a5654831/](https://www.linkedin.com/in/fl%C3%A1via-paulino-a5654831/)
 
 # 📊 ENEM, Socioeconomic Structure and Educational Performance
 ![Python](https://img.shields.io/badge/Python-3.10-blue)

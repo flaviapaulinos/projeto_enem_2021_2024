@@ -48,14 +48,14 @@ def render_aba_modelo():
     st.markdown(
         """ O modelo desenvolvido neste projeto tem como objetivo estimar a nota média esperada a partir de um perfil socioeconômico, com foco em uma interpretação estrutural e agregada. 
         
-        Cada observação do modelo representa um grupo definido por:
-        * faixa de renda familiar (em salários mínimos),
-        * escolaridade dos responsáveis,
-        * ocupação dos responsáveis,
-        * tipo de escola frequentada,
-        * características demográficas.
+    Cada observação do modelo representa um grupo definido por:
+    * faixa de renda familiar (em salários mínimos),
+    * escolaridade dos responsáveis,
+    * ocupação dos responsáveis,
+    * tipo de escola frequentada,
+    * características demográficas.
         
-        Essa agregação reduz o ruído individual e permite analisar relações mais estáveis entre contexto social e desempenho educacional."""
+    Essa agregação reduz o ruído individual e permite analisar relações mais estáveis entre contexto social e desempenho educacional."""
     )
 
     col1, col2 = st.columns([1.2, 1])
