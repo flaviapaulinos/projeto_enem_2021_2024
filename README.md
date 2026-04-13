@@ -208,7 +208,7 @@ O desempenho no ENEM não é determinado por um único fator, mas por uma estrut
 Os resultados mostram que:
 
 * desigualdades educacionais são estruturais
-* renda é importante, mas não isolada
+* renda é importante, mas não isoladamente
 * capital familiar e escola amplificam diferenças
 * tecnologia atua como mediador
 
