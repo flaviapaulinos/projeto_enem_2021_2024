@@ -135,6 +135,9 @@ def render_aba_projeto() -> None:
         e não de um único elemento isolado.
     """
     )
+    st.caption(
+    "Os percentuais apresentados foram estimados a partir da decomposição dos coeficientes do modelo preditivo."
+)
 
     st.divider()
 
