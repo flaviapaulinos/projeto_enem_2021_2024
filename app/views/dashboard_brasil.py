@@ -22,30 +22,55 @@ def controles_sidebar_apoio_br(opcoes_geo, key_prefix="br"):
 
     st.sidebar.caption("Ajustes rápidos")
 
-    geo = st.sidebar.selectbox(
+    # =========================================================
+    # SINCRONIZAÇÃO INICIAL
+    # =========================================================
+    if f"{key_prefix}_geo_sidebar" not in st.session_state:
+        st.session_state[f"{key_prefix}_geo_sidebar"] = st.session_state.get(f"{key_prefix}_geo", None)
+
+    if f"{key_prefix}_escola_sidebar" not in st.session_state:
+        st.session_state[f"{key_prefix}_escola_sidebar"] = st.session_state.get(f"{key_prefix}_escola", "Todas")
+
+    if f"{key_prefix}_materia_sidebar" not in st.session_state:
+        st.session_state[f"{key_prefix}_materia_sidebar"] = st.session_state.get(f"{key_prefix}_materia", "Todas")
+
+    # =========================================================
+    # CALLBACKS
+    # =========================================================
+    def sync_geo():
+        st.session_state[f"{key_prefix}_geo"] = st.session_state[f"{key_prefix}_geo_sidebar"]
+
+    def sync_escola():
+        st.session_state[f"{key_prefix}_escola"] = st.session_state[f"{key_prefix}_escola_sidebar"]
+
+    def sync_materia():
+        st.session_state[f"{key_prefix}_materia"] = st.session_state[f"{key_prefix}_materia_sidebar"]
+
+    # =========================================================
+    # SELECTBOXES
+    # =========================================================
+    st.sidebar.selectbox(
         "UF",
         [None] + opcoes_geo,
         format_func=lambda x: "Todos" if x is None else x,
-        key=f"{key_prefix}_geo_sidebar"
+        key=f"{key_prefix}_geo_sidebar",
+        on_change=sync_geo
     )
 
-    escola = st.sidebar.selectbox(
+    st.sidebar.selectbox(
         "Escola",
         ["Todas", "não informada", "pública", "privada"],
-        key=f"{key_prefix}_escola_sidebar"
+        key=f"{key_prefix}_escola_sidebar",
+        on_change=sync_escola
     )
 
-    materia = st.sidebar.selectbox(
+    st.sidebar.selectbox(
         "Matéria",
         ["Todas", "Matemática", "Linguagens"],
-        key=f"{key_prefix}_materia_sidebar"
+        key=f"{key_prefix}_materia_sidebar",
+        on_change=sync_materia
     )
-
-    # 🔥 sincronização com topo
-    st.session_state[f"{key_prefix}_geo"] = geo
-    st.session_state[f"{key_prefix}_escola"] = escola
-    st.session_state[f"{key_prefix}_materia"] = materia
-
+    
 @st.cache_data(show_spinner=False)
 def get_mapa(df):
     return gerar_mapa_enem(df, "uf")

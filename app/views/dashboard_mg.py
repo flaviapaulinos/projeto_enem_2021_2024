@@ -32,39 +32,64 @@ def controles_sidebar_apoio(opcoes_geo, opcoes_ano=None, key_prefix="mg"):
 
     st.sidebar.caption("Ajustes rápidos")
 
-    geo = st.sidebar.selectbox(
+    # =========================================================
+    # CALLBACKS
+    # =========================================================
+    def sync_geo():
+        st.session_state[f"{key_prefix}_geo"] = st.session_state[f"{key_prefix}_geo_sidebar"]
+
+    def sync_ano():
+        st.session_state[f"{key_prefix}_ano"] = st.session_state[f"{key_prefix}_ano_sidebar"]
+
+    def sync_escola():
+        st.session_state[f"{key_prefix}_escola"] = st.session_state[f"{key_prefix}_escola_sidebar"]
+
+    def sync_materia():
+        st.session_state[f"{key_prefix}_materia"] = st.session_state[f"{key_prefix}_materia_sidebar"]
+
+    # =========================================================
+    # REGIÃO
+    # =========================================================
+    st.sidebar.selectbox(
         "Região",
         [None] + opcoes_geo,
         format_func=lambda x: "Todos" if x is None else x,
-        key=f"{key_prefix}_geo_sidebar"
+        key=f"{key_prefix}_geo_sidebar",
+        on_change=sync_geo
     )
 
+    # =========================================================
+    # ANO
+    # =========================================================
     if opcoes_ano:
-        ano = st.sidebar.selectbox(
+        st.sidebar.selectbox(
             "Ano",
             [None] + opcoes_ano,
             format_func=lambda x: "Todos" if x is None else x,
-            key=f"{key_prefix}_ano_sidebar"
+            key=f"{key_prefix}_ano_sidebar",
+            on_change=sync_ano
         )
 
-    escola = st.sidebar.selectbox(
+    # =========================================================
+    # ESCOLA
+    # =========================================================
+    st.sidebar.selectbox(
         "Escola",
         ["Todas", "não informada", "pública", "privada"],
-        key=f"{key_prefix}_escola_sidebar"
+        key=f"{key_prefix}_escola_sidebar",
+        on_change=sync_escola
     )
 
-    materia = st.sidebar.selectbox(
+    # =========================================================
+    # MATÉRIA
+    # =========================================================
+    st.sidebar.selectbox(
         "Matéria",
         ["Todas", "Matemática", "Linguagens"],
-        key=f"{key_prefix}_materia_sidebar"
+        key=f"{key_prefix}_materia_sidebar",
+        on_change=sync_materia
     )
 
-    # 🔥 sincronização
-    st.session_state[f"{key_prefix}_geo"] = geo
-    if opcoes_ano:
-        st.session_state[f"{key_prefix}_ano"] = ano
-    st.session_state[f"{key_prefix}_escola"] = escola
-    st.session_state[f"{key_prefix}_materia"] = materia
     
 @st.cache_data(show_spinner=False)
 def get_mapa(df):
@@ -165,6 +190,7 @@ def render_dashboard_mg():
         key_prefix="mg"
     )
     
+    
     # Topo (principal)
     subaba, regiao, ano, escola, materia = linha_controles(
         subabas=["visão geral", "estrutura socioeconômica", "desempenho", "desempenho x estrutura"],
@@ -173,6 +199,7 @@ def render_dashboard_mg():
         key_prefix="mg",
         opcoes_ano=anos,
     )
+ 
     
     df_d = filtrar_df(df_d, regiao=regiao, ano=ano, escola=escola)
     df_r = filtrar_df(df_r, regiao=regiao, ano=ano, escola=escola)
