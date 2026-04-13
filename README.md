@@ -88,7 +88,7 @@ Estruturado com foco em reprodutibilidade:
 
 ---
 
-## 🧠 Engenharia de Features
+## Engenharia de Features
 
 - Faixas de renda (salários mínimos)  
 - Escolaridade dos pais (ordinal)  
@@ -102,18 +102,18 @@ Estruturado com foco em reprodutibilidade:
 
 ---
 
-## 🤖 Modelagem Preditiva
+## Modelagem Preditiva
 
-### 🎯 Objetivo
+### Objetivo
 Estimar a **nota média esperada** dado um perfil socioeconômico.
 
-### 🧩 Estratégia
+### Estratégia
 
 - Aprendizado supervisionado  
 - Unidade: grupos socioeducacionais  
 - Foco em interpretabilidade  
 
-### 🧠 Hipótese
+### Hipótese
 
 > O desempenho é majoritariamente explicado por fatores estruturais socioeconômicos.
 
@@ -122,7 +122,7 @@ Estimar a **nota média esperada** dado um perfil socioeconômico.
 - Minas Gerais (2021–2023)  
 - Dados agregados  
 
-### 🏆 Resultado
+### Resultado
 
 O modelo permite:
 
@@ -160,12 +160,10 @@ O dashboard permite:
 
 👉 **[Acesse o dashboard](https://projetoenem.streamlit.app/)**
 
----
 
 ##  Estrutura do Projeto
 
-
-
+```
 ├── dados/                  # Dados brutos e tratados
 ├── modelos/                # Modelos treinados
 ├── notebooks/              # Pipeline analítico completo
@@ -190,7 +188,7 @@ O dashboard permite:
 ├── scripts/                # Execução e treinamento
 ├── relatorios/             # Imagens e outputs
 └── README.md
----
+```
 
 
 ### Limitações
