@@ -6767,7 +6767,7 @@ def grafico_nota_media_por_categoria_escola_ano(
     if titulo is None:
         titulo_final = (
             f"Nota Média Ponderada por {nome_categoria}, "
-            f"Escola e Ano - {nome_escopo}{complemento_filtro}"
+            f" Escola e Ano - {nome_escopo}{complemento_filtro}"
         )
     else:
         titulo_final = titulo
@@ -6786,7 +6786,7 @@ def grafico_nota_media_por_categoria_escola_ano(
         labels={
             categoria: nome_categoria,
             "nota_media_ponderada": "Nota Média Ponderada",
-            "escola": "Tipo de Escola"
+            "escola": "Escola"
         },
         color_discrete_map=MAPA_CORES_ESCOLA,
         custom_data=["participantes_fmt", "nota_media_ponderada_fmt"],

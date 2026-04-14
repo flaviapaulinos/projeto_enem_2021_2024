@@ -102,15 +102,6 @@ DADOS_UNI_MG = PASTA_DADOS_ANALITICOS / "dados_uni_mg.parquet"
 RESULTADOS_UNI_MG = PASTA_DADOS_ANALITICOS / "resultados_uni_mg.parquet"
 AMOSTRAG_RESULTADOS_MG = PASTA_DADOS_ANALITICOS / "resultados_amostrag_mg.parquet"
 
-# Caxambu
-DADOS_CAX_21_23 = PASTA_DADOS_ANALITICOS / "dados_21_23_cax.parquet"
-DADOS_AGG_CAX_21_23 = PASTA_DADOS_ANALITICOS / "dados_21_23_agg_cax.parquet"
-MERGED_CAX = PASTA_DADOS_ANALITICOS / "merged_cax.parquet"
-MERGED_CAX_NUM = PASTA_DADOS_ANALITICOS / "merged_num_cax.parquet"
-RESULTADOS_AGG_CAX = PASTA_DADOS_ANALITICOS / "resultados_agg_cax.parquet"
-DADOS_AGG_CAX = PASTA_DADOS_ANALITICOS / "dados_agg_cax.parquet"
-DADOS_UNI_CAX = PASTA_DADOS_ANALITICOS / "dados_uni_cax.parquet"
-RESULTADOS_UNI_CAX = PASTA_DADOS_ANALITICOS / "resultados_uni_cax.parquet"
 
 # ======================
 # MODELOS
