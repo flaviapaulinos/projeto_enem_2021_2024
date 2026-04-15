@@ -63,10 +63,10 @@ COLOR_MAP_RENDA_COMP = {
     "até 1": "khaki",
     "1 a 3": "teal",
     "3 a 5": "cornflowerblue",
-    "5 a 10": "deepskyblue",
-    "10 a 15": "lightsalmon",
+    "5 a 10": "lightsalmon",
+    "10 a 15": "darkolivegreen",
     "15 a 20": "gold",
-    "acima de 20": "darkolivegreen",
+    "acima de 20": "deepskyblue",
 }
 
 MAPA_CORES_ESCOLA = {
