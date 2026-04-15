@@ -28,6 +28,7 @@ from src.visualizacao.graficos_dash import (
     grafico_nota_media_por_categoria_escola_ano,
     grafico_notas_linhas_max,
     grafico_notas_violino,
+    grafico_raca_por_renda_barras,
     grafico_renda_responsavel,
     tabela_plotly_gradiente,
     tabela_notas_maximas,
@@ -97,6 +98,13 @@ def render_subaba_social_demografica_mg(
             escopo="mg",
         )
         plot(fig_tab, "mg_social_tab")
+
+    fig_distrib_renda, _ = grafico_raca_por_renda_barras(
+        df_d_seg,
+        escopo="mg",
+    )
+    plot(fig_distrib_renda, "mg_distrib_renda")
+
 
     fig_tree, _ = treemap_escola_renda(
         df=df_d_seg,
