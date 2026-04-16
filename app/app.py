@@ -116,12 +116,28 @@ with open(img_path, "rb") as f:
     img_base64 = base64.b64encode(img_bytes).decode()
 
 
-# HTML com imagem embutida
 st.markdown(
     f"""
-    <a href="https://github.com/flaviapaulinos" target="_blank">
-        <img src="data:image/png;base64,{img_base64}" style="width:100%; cursor:pointer;">
-    </a>
+    <style>
+    .assinatura-full {{
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        width: 100vw;
+    }}
+    .assinatura-full img {{
+        width: 100%;
+        display: block;
+    }}
+    </style>
+
+    <div class="assinatura-full">
+        <a href="https://github.com/flaviapaulinos" target="_blank">
+            <img src="data:image/png;base64,{img_base64}">
+        </a>
+    </div>
     """,
     unsafe_allow_html=True
 )
