@@ -2437,7 +2437,7 @@ def tabela_plotly_gradiente(
         filtro_geo=filtro_geo
     ).copy()
 
-    colunas_validas = {"sexo", "cor_raca", "escola"}
+    colunas_validas = {"sexo", "cor_raca", "escola", "faixa_etaria"}
     
     if coluna is None:
         coluna = "cor_raca"
@@ -5577,6 +5577,129 @@ def analise_acesso_tecnologia(
                 family="Arial Bold, Arial, sans-serif",
                 size=10,
             )
+
+    return fig, df_final
+
+
+def analise_acesso_tecnologia_cax(
+    df: pd.DataFrame,
+    escopo: str = "caxambu",
+    escola_selecionada: Optional[str] = None,
+    titulo: Optional[str] = None,
+    weight_col: str = "participantes"
+) -> Tuple[go.Figure, pd.DataFrame]:
+
+    # =========================
+    # 🔹 FILTRO PADRÃO
+    # =========================
+    df_filtrado = aplicar_filtros_dashboard(
+        df=df,
+        escopo=escopo
+    ).copy()
+
+    if escola_selecionada and escola_selecionada != "Todas":
+        df_filtrado = df_filtrado[df_filtrado["escola"] == escola_selecionada]
+
+    if df_filtrado.empty:
+        return go.Figure(), pd.DataFrame()
+
+    # =========================
+    # 🔹 AGREGAÇÃO POR ANO
+    # =========================
+    registros = []
+
+    for ano in sorted(df_filtrado["ano"].dropna().unique()):
+        df_ano = df_filtrado[df_filtrado["ano"] == ano]
+
+        registros.append(
+            {
+                "ano": str(ano),
+                "cel": media_ponderada(df_ano, "cel", weight_col),
+                "comptdr": media_ponderada(df_ano, "comptdr", weight_col),
+                "nota_media": media_ponderada(df_ano, "nota_media", weight_col),
+                "participantes": df_ano[weight_col].sum()
+            }
+        )
+
+    df_final = pd.DataFrame(registros)
+
+    if df_final.empty:
+        return go.Figure(), pd.DataFrame()
+
+    # =========================
+    # 🔹 FORMATAÇÃO
+    # =========================
+    df_final = adicionar_colunas_hover_br(
+        df_final,
+        {
+            "cel_fmt": ("cel", 2, "decimal"),
+            "comptdr_fmt": ("comptdr", 2, "decimal"),
+            "nota_fmt": ("nota_media", 1, "decimal"),
+            "participantes_fmt": ("participantes", 0, "numero"),
+        }
+    )
+
+    # =========================
+    # 🔹 TÍTULO
+    # =========================
+    if titulo is None:
+        titulo = "Evolução do Acesso à Tecnologia x Nota Média — Caxambu"
+
+        if escola_selecionada and escola_selecionada != "Todas":
+            titulo += f" ({escola_selecionada})"
+
+    # =========================
+    # 🔹 GRÁFICO
+    # =========================
+    fig = make_subplots(specs=[[{"secondary_y": True}]])
+
+    # barras - celular
+    fig.add_trace(
+        go.Bar(
+            x=df_final["ano"],
+            y=df_final["cel"],
+            name="Celulares",
+            marker_color=SEQUENCIA_CORES[0],
+            text=df_final["cel_fmt"],
+        ),
+        secondary_y=False
+    )
+
+    # barras - computador
+    fig.add_trace(
+        go.Bar(
+            x=df_final["ano"],
+            y=df_final["comptdr"],
+            name="Computadores",
+            marker_color=SEQUENCIA_CORES[1],
+            text=df_final["comptdr_fmt"],
+        ),
+        secondary_y=False
+    )
+
+    # linha - nota
+    fig.add_trace(
+        go.Scatter(
+            x=df_final["ano"],
+            y=df_final["nota_media"],
+            name="Nota média",
+            mode="lines+markers+text",
+            text=df_final["nota_fmt"],
+            line=dict(color=SEQUENCIA_CORES[2], width=3),
+        ),
+        secondary_y=True
+    )
+
+    # =========================
+    # 🔹 LAYOUT
+    # =========================
+    fig.update_layout(
+        title=dict(text=titulo, x=0.5),
+        barmode="group",
+        height=500,
+        template="plotly_white",
+        legend=dict(orientation="h", x=0.5, xanchor="center")
+    )
 
     return fig, df_final
 

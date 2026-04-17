@@ -35,3 +35,4 @@ def carregar_bases_mg() -> dict[str, pd.DataFrame]:
         "amostra": pd.read_parquet(AMOSTRAG_RESULTADOS_MG),
         "21_23": pd.read_parquet(DADOS_AGG_MG_21_23),
     }
+
