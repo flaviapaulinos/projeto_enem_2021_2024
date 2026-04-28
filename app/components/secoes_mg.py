@@ -188,6 +188,7 @@ def render_subaba_notas_mg(
     fig_box, _ = boxplot_notas_por_regiao(
         df=df_amostra,
         escopo="mg",
+        materia_selecionada=materia if materia != "Todas" else "Nota Média"
     )
     plot(fig_box, "mg_box")
 

@@ -171,6 +171,7 @@ def render_subaba_notas_br(
         df=df_amostra,
         escopo="br",
         weight_col="participantes",
+        materia_selecionada=materia if materia != "Todas" else "Nota Média"
     )
     plot(fig_box, "br_box")
 
